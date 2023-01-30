@@ -78,6 +78,11 @@ export class UsersController {
     return this.userService.remove(intId);
   }
 
+  @Post('/withEmail/:email')
+  deleteUserWithEmail(@Param('email') email: string) {
+    return this.userService.removeWithEmail(email);
+  }
+
   @Patch('/:id')
   updateUser(@Param('id') id: string, @Body() body: UpdateUserDTO) {
     return this.userService.update(parseInt(id), body);

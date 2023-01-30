@@ -31,6 +31,9 @@ GET http://localhost:3000/auth?test@test.com
 ### Delete a user with given user id
 DELETE  http://localhost:3000/auth/15
 
+### Delete a user with the email
+DELETE http://localhost:3000/auth/withEmail/test@test.com
+
 ### Update a user with given data
 PATCH http://localhost:3000/auth/6
 content-type: application/json
