@@ -4,7 +4,7 @@ POST http://localhost:3000/auth/signup
 content-type: application/json
 
 {
-   "email": "test@test.com",
+   "email": "asdf@asdf.com",
    "password": "12345"
 }
 
@@ -14,7 +14,7 @@ POST http://localhost:3000/auth/signin
 content-type: application/json
 
 {
-   "email": "test@test.com",
+   "email": "asdf@asdf.com",
    "password": "12345"
 }
 
@@ -35,11 +35,12 @@ DELETE  http://localhost:3000/auth/15
 DELETE http://localhost:3000/auth/withEmail/test@test.com
 
 ### Update a user with given data
-PATCH http://localhost:3000/auth/6
+PATCH http://localhost:3000/auth/2
 content-type: application/json
 
 {
-   "email": "asdf@asdf.com"
+   "email": "asdf@asdf.com",
+   "admin": true
 }
 
 ### Set a color
