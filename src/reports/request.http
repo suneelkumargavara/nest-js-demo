@@ -24,3 +24,5 @@ content-type: application/json
 ### Get an estimate for an existing vehicle
 GET http://localhost:3000/reports?price=15000&make=ford&model=mustange&lng=0&lat=0&mileage=12000&year=1980
 
+### Delete an existing report 
+DELETE  http://localhost:3000/reports/11

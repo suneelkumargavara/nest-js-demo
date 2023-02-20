@@ -9,9 +9,8 @@ import { ReportsModule } from './reports/reports.module';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-
-import { User } from './users/users.entity';
-import { Report } from './reports/reports.entity';
+import { User } from './entities/users.entity';
+import { Report } from './entities/reports.entity';
 
 const cookieSession = require('cookie-session');
 
@@ -26,9 +25,9 @@ const cookieSession = require('cookie-session');
       useFactory: (config: ConfigService) => {
         return {
           type: 'sqlite',
-          database: config.get<string>('DB_NAME'),
+          database: config.get('DB_NAME'),
           entities: [User, Report],
-          synchronize: true,
+          synchronize: process.env.NODE_ENV === 'test',
         };
       },
     }),
@@ -45,11 +44,14 @@ const cookieSession = require('cookie-session');
   ],
 })
 export class AppModule {
+  constructor(private configService: ConfigService) {}
+
+  // Applying the middleware
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(
         cookieSession({
-          keys: ['afdsafdp'],
+          keys: [this.configService.get('COOKIE_KEY')],
         }),
       )
       .forRoutes('*');

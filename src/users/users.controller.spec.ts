@@ -4,7 +4,7 @@ import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 import { AuthService } from './auth.service';
 
-import { User } from './users.entity';
+import { User } from '../entities/users.entity';
 import { NotFoundException } from '@nestjs/common';
 
 describe('UsersController', () => {

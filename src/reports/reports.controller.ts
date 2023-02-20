@@ -7,6 +7,7 @@ import {
   Param,
   Get,
   Query,
+  Delete,
 } from '@nestjs/common';
 
 import { AuthGuard } from '../guards/auth.guard';
@@ -18,7 +19,7 @@ import { CurrentUser } from '../users/decorators/currentuser.decorator';
 
 import { Serialize } from '../interceprots/serialize.interceptor';
 
-import { User } from '../users/users.entity';
+import { User } from '../entities/users.entity';
 
 import { ReportDTO } from './dtos/reports.dto';
 import { CreateReportDTO } from './dtos/create-report.dto';
@@ -45,5 +46,10 @@ export class ReportsController {
   @UseGuards(AdminGuard)
   approveReport(@Param('id') id: string, @Body() body: ApproveReportDTO) {
     return this.reportsService.changeApproval(id, body.approved);
+  }
+
+  @Delete('/:id')
+  deleteReport(@Param('id') id: string) {
+    return this.reportsService.deleteReport(id);
   }
 }

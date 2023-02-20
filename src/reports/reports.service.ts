@@ -4,13 +4,13 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Not, Repository } from 'typeorm';
 
 import { CreateReportDTO } from './dtos/create-report.dto';
 import { GetEstimateDTO } from './dtos/get-estimates.dto';
 
-import { Report } from './reports.entity';
-import { User } from '../users/users.entity';
+import { Report } from '../entities/reports.entity';
+import { User } from '../entities/users.entity';
 
 @Injectable()
 export class ReportsService {
@@ -49,5 +49,11 @@ export class ReportsService {
     if (!report) throw new NotFoundException('report not found!');
     report.approved = approved;
     return this.repo.save(report);
+  }
+
+  async deleteReport(id: string) {
+    const report = await this.findOne(id);
+    if (!report) throw new NotFoundException('report not founc');
+    return this.repo.remove(report);
   }
 }
